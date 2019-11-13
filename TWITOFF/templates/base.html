@@ -1,20 +1,39 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- add in title here and in app.py -->
         <title> Twitoff! - {{ title }}</title>
+        <!-- add in title here and in app.py -->
+        <link rel="stylesheet" href="https://unpkg.com/picnic">
+
     </head>
 
     <body>
-        <h1> Twitoff rules! </h1>
-        <p> Content goes here ... </p>
+        <h1> Twitoff! </h1>
 
-        <u1>
+    <!-- put in a form to type in users -->
+    {% block content %}
+    <form action="/user" method="post">
+        <input type="text" name="user_name" placeholder="User to add">
+        <input type="submit" value="Add User">
+    </form>
+
+    <!--- put in form to compare users -->
+    <form action="/compare" method="post">
+        <select name="user1">
             {% for user in users %}
-            <li>{{ user.name }}</li>
+            <option value = "{{ user.name }}">{{ user.name }}</option>
             {% endfor %}
-        </u1>
+        </select>
+        <select name ="user2">
+            {% for user in users %}
+            <option value = "{{ user.name }}">{{ user.name }}</option>
+            {% endfor %}
+        </select>
+        <input type="text" name="tweet_text" placeholder="Tweet text to predict">
+        <input type="submit" value="Comare Users">
+    </form>
 
+    {% endblock %}
     </body>
-
+    
 </html>
