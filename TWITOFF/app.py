@@ -61,7 +61,7 @@ def create_app():
                                request.values['user2']])
         if user1 == user2:
             message = """ What point is there comparing a user to
-                        themselves, you silly person?"""
+                        themselves, you silly person? """
         else:
             prediction = predict_user(user1,
                                       user2,
