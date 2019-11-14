@@ -7,7 +7,7 @@ DB = SQLAlchemy()
 
 class User(DB.Model):
     """Twitter users that we analyze"""
-    id = DB.Column(DB.Integer, primary_key=True)
+    id = DB.Column(DB.BigInteger, primary_key=True)
     name = DB.Column(DB.String(15), nullable=False)
     newest_tweet_id = DB.Column(DB.BigInteger)
 
@@ -17,12 +17,18 @@ class User(DB.Model):
 
 class Tweet(DB.Model):
     """The user's tweets from twitter"""
-    id = DB.Column(DB.BigInteger, primary_key=True)
+    id = DB.Column(DB.BigInteger,
+                   primary_key=True)
     text = DB.Column(DB.Unicode(500))
-    user_id = DB.Column(DB.BigInteger, DB.ForeignKey('user.id'), nullable=False)
-    user = DB.relationship('User', backref=DB.backref('tweets', lazy=True))
+    user_id = DB.Column(DB.BigInteger,
+                        DB.ForeignKey('user.id'),
+                        nullable=False)
+    user = DB.relationship('User',
+                           backref=DB.backref('tweets',
+                                              lazy=True))
 
-    embedding = DB.Column(DB.PickleType, nullable=False)
+    embedding = DB.Column(DB.PickleType,
+                          nullable=False)
 
     # nicer formatting
     def __repr__(self):
